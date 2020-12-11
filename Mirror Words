@@ -1,0 +1,31 @@
+function mirrorWords([input]) {
+    let pattern = /([@|#])[A-Za-z]{3,}\1\1[A-Za-z]{3,}\1/g;
+    let word = /[A-Za-z]{3,}/g
+    let matches = input.match(pattern);
+    let toPrint = [];
+    if (matches !== null) {
+        console.log(`${matches.length} word pairs found!`);
+    } else {
+        console.log("No word pairs found!");
+    }
+    if (matches) {
+        matches.forEach(element => {
+            let pairs = element.match(word);
+            let firstWord = pairs[0];
+            let secondWord = pairs[1].split(``)
+                .reverse()
+                .join(``);
+            if (firstWord === secondWord) {
+                let result = `${pairs[0]} <=> ${pairs[1]}`
+                toPrint.push(result);
+            }
+        });
+    }
+
+    if (toPrint.length > 0) {
+        console.log("The mirror words are:");
+        console.log(toPrint.join(`, `));
+    } else {
+        console.log("No mirror words!");
+    }
+}
